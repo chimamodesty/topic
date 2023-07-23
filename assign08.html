@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Purchase Items</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<h3></h3>
+
+	<form>
+		<ul>
+			<li>
+				<label for="fname">First Name</label>
+		<input type="text" id="fname" name="first_name">
+		<span id="errorfname" class="errorMsg"></span>
+			</li>
+			<li>
+				<label for="last_name">Last Name</label>
+		<input type="text" id="last_name" name="last_name">
+		<span id="errorlname" class="errorMsg"></span>
+			</li>
+			<li>
+				<label for="address">Address</label>
+		<textarea cols="30" rows="10" id="address" name="address" placeholder="Street, City, State, Zipcode"></textarea>
+		<small id="errorAddress" class="errorMsg"></small>
+			</li>
+			<li>
+				<label for="phone">Phone</label>
+		<input type="tel" id="phone" name="phone" placeholder="208-555-5555" required>
+		<small id="errorPhone" class="errorMsg"></small>
+			</li>
+			<li>
+				<input type="checkbox" onclick="sumItems();" id="item_0" name="item_0" value="15">
+  <label for="item_0">Item_0</label>
+  </li>
+			<li>
+  <input type="checkbox" id="item_1" onclick="sumItems();" name="item_1" value="25">
+  <label for="item_1">Item_1</label>
+  </li>
+			<li>
+  <input type="checkbox" id="item_2" onclick="sumItems();" name="item_2" value="35">
+  <label for="item_2">Item_2</label>
+			</li>
+			<li>
+  <input type="checkbox" id="item_3" onclick="sumItems();" name="item_3" value="50">
+  <label for="item_3">Item_3</label>
+			</li>
+			<li>
+<label for="total">Total</label>
+		<input type="text" disabled id="total" name="total">
+			</li>
+
+			<li>
+				 <input type="radio" id="visa" name="card" value="visa">
+  <label for="visa">VISA</label><br>
+  <input type="radio" id="mastercard" name="card" value="mastercard">
+  <label for="mastercard">MasterCard</label><br>
+  <input type="radio" id="javascript" name="card" value="american_express">
+  <label for="javascript">American Express</label>
+			</li>
+			<li>
+				<label for="credit_card">Credit Card</label>
+		<input type="text" id="credit_card" name="credit_card" pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}" placeholder="1111 1111 1111 1111">
+		<span id="errorCC" class="errorMsg"></span>
+			</li>
+
+			<li>
+				<label for="exp_date">Expiration Date</label>
+		<input type="text" id="exp_date" name="exp_date" required pattern="[0-9]{2}/[0-9]{4}" placeholder="01/2020">
+		<span id="errorExp_date" class="errorMsg"></span>
+			</li>
+
+			<li>
+				<input type="reset" id="resetBtn" name="reset">
+
+				<input type="button" id="validateBtn" name="submit" onclick="validate()" value="Submit">
+			</li>	
+		
+	</ul>
+	</form>
+<script type="text/javascript">
+		var fname = document.getElementById("fname")
+		var lname = document.getElementById("last_name")
+		var address = document.getElementById("address")
+		var phone = document.getElementById("phone")
+		var creditcard = document.getElementById("credit_card")
+
+		var expDate = document.getElementById("exp_date")
+		var item1 = document.getElementById("item_0")
+		var item2 = document.getElementById("item_1")
+		var item3 = document.getElementById("item_2")
+		var item4 = document.getElementById("item_3")
+
+
+	function sumItems() {
+		let w=0,x=0,y=0,z = 0;
+
+		if(item1.checked){
+			w = parseInt(item1.value)
+			
+		}
+		if(item2.checked){
+			x = parseInt(item2.value)
+		}
+		if(item3.checked){
+			y = parseInt(item3.value)
+		}
+		if(item4.checked){
+			z = parseInt(item4.value)
+		}
+			
+		var total = w+x+y+z
+		document.getElementById('total').value = total.toFixed(2);
+	}
+
+	function validate(){
+		 phonePattern = "/^[0-9]{3}-[0-9]{3}-[0-9]{4}/"
+		 var isPhoneNum = phonePattern.test(phone.value)
+		
+
+		if (fname.value == "" || fname.value == " ") {
+			document.getElementById("errorfname").innerHTML = "Please enter your first name";
+			
+			fname.focus()
+			return false;
+		}
+		else if (lname.value == "" || lname.value == " ") {
+			document.getElementById("errorlname").innerHTML = "Please enter your last name";
+			
+			lname.focus()
+			return false;
+		}
+
+		else if (address.value == "" || address.value == " ") {
+			document.getElementById("errorAddress").innerHTML = "Please enter your address";
+			
+			address.focus()
+			return false;
+		}
+
+		else if (phone.value == "" || phone.value == " " || isPhoneNum) {
+			document.getElementById("errorPhone").innerHTML = "the inpput is invalid";
+			
+			phone.focus()
+			return false;
+		}
+
+		else {
+			alert("All fields were filled appropriately")
+		}
+	}
+</script>
+</body>
+</html>
